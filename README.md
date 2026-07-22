@@ -373,7 +373,8 @@ npm run build
 5. Add all variables from `backend/.env.example`.
 6. Set `NODE_ENV=production`.
 7. Use MongoDB Atlas and allow the deployment provider’s network access.
-8. Set `CLIENT_URL` to the deployed frontend URL exactly.
+8. Set `CLIENT_URL` to the deployed frontend URL exactly, including every hyphen. For this deployment use `https://ai-sustainable-package-advisor-1mke.vercel.app`.
+9. If you use another Vercel production or preview domain, add it to `ADDITIONAL_CLIENT_URLS` as a comma-separated value.
 
 ### Frontend: Vercel or Netlify
 

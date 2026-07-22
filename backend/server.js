@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const hpp = require("hpp");
 const connectDB = require("./config/db");
+const corsOptions = require("./config/cors");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const { sanitizeRequest } = require("./middleware/securityMiddleware");
 
@@ -23,7 +24,7 @@ const configureSocket = require("./config/socket");
 
 const app = express();
 const httpServer = http.createServer(app);
-const io = new Server(httpServer, { cors: { origin: process.env.CLIENT_URL || "http://localhost:5173", credentials: true } });
+const io = new Server(httpServer, { cors: corsOptions });
 configureSocket(io);
 app.set("io", io);
 connectDB();
@@ -31,12 +32,7 @@ connectDB();
 app.set("trust proxy", 1);
 app.disable("x-powered-by");
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
-    credentials: true,
-  }),
-);
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
