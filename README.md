@@ -9,8 +9,8 @@ EcoPack AI is a full-stack, AI-powered web application that helps businesses cho
 | Item | Link / value |
 | --- | --- |
 | GitHub repository | https://github.com/Tobi0203/AISustainablePackageAdvisor |
-| Live frontend URL | Add deployed frontend URL after deployment |
-| Live API URL | Add deployed API URL after deployment |
+| Live frontend URL | https://ai-sustainable-package-advisor-1mke.vercel.app/ |
+| Live API URL | https://aisustainablepackageadvisor.onrender.com |
 
 ## Assessment Alignment
 
@@ -320,37 +320,37 @@ All protected endpoints require the secure authentication cookie created by logi
 
 ### Functional Testing
 
-- [ ] Register customer and supplier accounts
-- [ ] Sign in, sign out, and restore secure-cookie session
-- [ ] Confirm unauthorized users are redirected from protected routes
-- [ ] Confirm each role cannot access the other role’s dashboard
-- [ ] Search and filter products
-- [ ] Open product details and submit RFQ as customer
-- [ ] Sign in as a supplier and create, edit, and delete own products
-- [ ] Sign in as a supplier and respond to an RFQ with amount, currency, lead time, validity, and a message
-- [ ] Sign in as a customer and accept, reject, or cancel a quotation
-- [ ] Open the same RFQ as customer and supplier in separate sessions; verify messages arrive without refreshing
-- [ ] Save/remove favorites and compare up to three products
-- [ ] Update customer and supplier profiles
-- [ ] Verify supplier as admin
-- [ ] Submit AI recommendation request with valid and invalid fields
-- [ ] Send chatbot questions and verify a useful response or graceful service error
+- [ x ] Register customer and supplier accounts
+- [ x ] Sign in, sign out, and restore secure-cookie session
+- [ x ] Confirm unauthorized users are redirected from protected routes
+- [ x ] Confirm each role cannot access the other role’s dashboard
+- [ x ] Search and filter products
+- [ x ] Open product details and submit RFQ as customer
+- [ x ] Sign in as a supplier and create, edit, and delete own products
+- [ x ] Sign in as a supplier and respond to an RFQ with amount, currency, lead time, validity, and a message
+- [ x ] Sign in as a customer and accept, reject, or cancel a quotation
+- [ x ] Open the same RFQ as customer and supplier in separate sessions; verify messages arrive without refreshing
+- [ x ] Save/remove favorites and compare up to three products
+- [ x ] Update customer and supplier profiles
+- [ x ] Verify supplier as admin
+- [ x ] Submit AI recommendation request with valid and invalid fields
+- [ x ] Send chatbot questions and verify a useful response or graceful service error
 
 ### UI/UX Testing
 
-- [ ] Test 320px mobile, tablet, and desktop layouts
-- [ ] Test navigation menu at mobile width
-- [ ] Confirm visible keyboard focus states
-- [ ] Confirm loading, empty, not-found, and backend error states
-- [ ] Test current Chrome, Firefox, Edge, and Safari
+- [ x ] Test 320px mobile, tablet, and desktop layouts
+- [ x ] Test navigation menu at mobile width
+- [ x ] Confirm visible keyboard focus states
+- [ x ] Confirm loading, empty, not-found, and backend error states
+- [ x ] Test current Chrome, Firefox, Edge, and Safari
 
 ### Security Testing
 
-- [ ] Ensure `.env` files are not committed
-- [ ] Confirm protected routes reject missing/invalid cookies or JWTs
-- [ ] Confirm supplier cannot edit another supplier’s product
-- [ ] Test invalid MongoDB-style payload keys and malformed IDs
-- [ ] Review CORS origin before production deployment
+- [ x ] Ensure `.env` files are not committed
+- [ x ] Confirm protected routes reject missing/invalid cookies or JWTs
+- [ x ] Confirm supplier cannot edit another supplier’s product
+- [ x ] Test invalid MongoDB-style payload keys and malformed IDs
+- [ x ] Review CORS origin before production deployment
 
 ### Build Validation
 
@@ -405,10 +405,10 @@ npm run build
 
 ## Submission Checklist
 
-- [ ] GitHub repository is public or shared with the evaluator
-- [ ] Live frontend URL is available and working
-- [ ] Live backend URL is available and working
-- [ ] README includes architecture, AI tooling, test checklist, and deployment guide
-- [ ] Master prompt is present in this README and in source code
-- [ ] Environment secrets are excluded from version control
-- [ ] Demo credentials are included only if they are safe to share
+- [ x ] GitHub repository is public or shared with the evaluator
+- [ x ] Live frontend URL is available and working
+- [ x ] Live backend URL is available and working
+- [ x ] README includes architecture, AI tooling, test checklist, and deployment guide
+- [ x ] Master prompt is present in this README and in source code
+- [ x ] Environment secrets are excluded from version control
+- [ x ] Demo credentials are included only if they are safe to share
