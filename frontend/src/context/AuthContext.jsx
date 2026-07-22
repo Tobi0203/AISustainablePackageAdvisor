@@ -10,7 +10,8 @@ export const AuthProvider = ({ children }) => {
       const { data } = await api.get("/auth/me");
       setUser(data.user);
       setSupplier(data.supplier);
-    } catch {
+    } catch (error) {
+      if (error.response?.status === 401) localStorage.removeItem("accessToken");
       setUser(null);
       setSupplier(null);
     } finally {
@@ -22,14 +23,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
   const login = async (payload) => {
     const { data } = await api.post("/auth/login", payload);
-    if (data.token) sessionStorage.setItem("accessToken", data.token);
+    if (data.token) localStorage.setItem("accessToken", data.token);
     setUser(data.user);
     if (data.user.role === "supplier") await hydrate();
     return data.user;
   };
   const register = async (payload) => {
     const { data } = await api.post("/auth/register", payload);
-    if (data.token) sessionStorage.setItem("accessToken", data.token);
+    if (data.token) localStorage.setItem("accessToken", data.token);
     setUser(data.user);
     if (data.user.role === "supplier") await hydrate();
     return data.user;
@@ -38,7 +39,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await api.post("/auth/logout");
     } finally {
-      sessionStorage.removeItem("accessToken");
+      localStorage.removeItem("accessToken");
       setUser(null);
       setSupplier(null);
     }
