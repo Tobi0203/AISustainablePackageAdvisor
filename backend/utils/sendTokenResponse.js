@@ -9,6 +9,8 @@ const sendTokenResponse = (user, statusCode, res) => {
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     maxAge: days * 24 * 60 * 60 * 1000,
   });
-  res.status(statusCode).json({ success: true, user: user.toJSON() });
+  // The cookie is the primary session. The response token is a fallback for
+  // deployed browsers that block third-party cookies between Vercel and Render.
+  res.status(statusCode).json({ success: true, token, user: user.toJSON() });
 };
 module.exports = sendTokenResponse;

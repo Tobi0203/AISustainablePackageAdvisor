@@ -22,12 +22,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
   const login = async (payload) => {
     const { data } = await api.post("/auth/login", payload);
+    if (data.token) sessionStorage.setItem("accessToken", data.token);
     setUser(data.user);
     if (data.user.role === "supplier") await hydrate();
     return data.user;
   };
   const register = async (payload) => {
     const { data } = await api.post("/auth/register", payload);
+    if (data.token) sessionStorage.setItem("accessToken", data.token);
     setUser(data.user);
     if (data.user.role === "supplier") await hydrate();
     return data.user;
@@ -36,6 +38,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await api.post("/auth/logout");
     } finally {
+      sessionStorage.removeItem("accessToken");
       setUser(null);
       setSupplier(null);
     }

@@ -4,6 +4,11 @@ const api = axios.create({
   withCredentials: true,
   timeout: 20000,
 });
+api.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem("accessToken");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
 api.interceptors.response.use(
   (response) => response,
   (error) => Promise.reject(error),
