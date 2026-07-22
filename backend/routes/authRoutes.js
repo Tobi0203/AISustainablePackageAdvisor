@@ -1,0 +1,4 @@
+const router = require('express').Router(); const { body } = require('express-validator'); const validate = require('../middleware/validateMiddleware'); const c = require('../controllers/authController'); const { protect } = require('../middleware/authMiddleware');
+router.post('/register', [body('name').trim().notEmpty().withMessage('Name is required.'), body('email').isEmail().withMessage('A valid email is required.').normalizeEmail(), body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters.'), body('role').optional().isIn(['customer', 'supplier']).withMessage('Role must be customer or supplier.')], validate, c.register);
+router.post('/login', [body('email').isEmail().withMessage('A valid email is required.').normalizeEmail(), body('password').notEmpty().withMessage('Password is required.')], validate, c.login);
+router.post('/logout', c.logout); router.get('/me', protect, c.me); module.exports = router;

@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const { body } = require('express-validator');
+const validate = require('../middleware/validateMiddleware'); const { protect } = require('../middleware/authMiddleware'); const c = require('../controllers/aiController');
+const packagingInput = [body('productType').trim().isLength({ min: 2, max: 120 }).withMessage('Product type is required.'), body('weight').trim().isLength({ min: 1, max: 60 }).withMessage('Weight is required.'), body('budget').trim().isLength({ min: 1, max: 100 }).withMessage('Budget is required.'), body('fragility').isIn(['low', 'medium', 'high']).withMessage('Fragility must be low, medium, or high.'), body('destination').trim().isLength({ min: 2, max: 160 }).withMessage('Destination is required.'), body('sustainabilityPreference').isIn(['balanced', 'recyclable', 'compostable', 'lowest-carbon', 'reusable']).withMessage('Choose a sustainability preference.')];
+router.use(protect);
+router.post('/recommendations', packagingInput, validate, c.getRecommendation);
+router.post('/sustainability-score', packagingInput, validate, c.getSustainabilityScore);
+router.post('/cost-estimate', packagingInput, validate, c.getCostEstimate);
+router.post('/chat', [body('message').trim().isLength({ min: 2, max: 2000 }).withMessage('Enter a packaging question.'), body('history').optional().isArray({ max: 8 })], validate, c.chat);
+module.exports = router;
