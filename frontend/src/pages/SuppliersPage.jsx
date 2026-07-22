@@ -1,24 +1,24 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import api from "../lib/api";
 import Loading from "../components/Loading";
 import { Empty } from "./ProductsPage";
 export default function SuppliersPage() {
   const [suppliers, setSuppliers] = useState(null);
   const [query, setQuery] = useState("");
-  const load = async () => {
+  const load = useCallback(async (search = "") => {
     setSuppliers(null);
     try {
       const { data } = await api.get("/suppliers", {
-        params: query ? { search: query } : {},
+        params: search ? { search } : {},
       });
       setSuppliers(data.suppliers);
     } catch {
       setSuppliers([]);
     }
-  };
+  }, []);
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
   return (
     <section className="py-10">
       <h1 className="text-4xl text-forest">Verified packaging suppliers</h1>
@@ -31,9 +31,9 @@ export default function SuppliersPage() {
           placeholder="Search suppliers or materials"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && load()}
+          onKeyDown={(e) => e.key === "Enter" && load(query)}
         />
-        <button className="btn-primary" onClick={load}>
+        <button className="btn-primary" onClick={() => load(query)}>
           Search
         </button>
       </div>

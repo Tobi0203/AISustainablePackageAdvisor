@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -12,11 +12,12 @@ export function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
   const { user } = useAuth();
-  const load = async () => {
+  const queryString = params.toString();
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const { data } = await api.get("/products", {
-        params: Object.fromEntries(params),
+        params: Object.fromEntries(new URLSearchParams(queryString)),
       });
       setProducts(data.products);
     } catch {
@@ -24,10 +25,10 @@ export function ProductsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [queryString]);
   useEffect(() => {
     load();
-  }, [params.toString()]);
+  }, [load]);
   useEffect(() => {
     if (user?.role === "customer")
       api
